@@ -1,0 +1,8 @@
+eGradebook
+==========
+
+This is the project for my highschool graduation (2010/2011).
+
+Virtualenv and pip's requirements.txt are not used by purpose. It was just
+easier to deploy final project to my mentor with all files in one place.
+
