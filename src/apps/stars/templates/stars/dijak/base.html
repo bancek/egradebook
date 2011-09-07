@@ -1,0 +1,17 @@
+{% extends 'stars/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Dijak{% endblock %}
+
+{% block nav %}
+    <li><a href="{% url stars_dijak dijak.id %}" class="{% block nav_dijak %}{% endblock %}">Dijak</a></li>
+    <li><a href="{% url stars_dijak_ocene dijak.id %}" class="{% block nav_ocene %}{% endblock %}">Ocene</a></li>
+    <li><a href="{% url stars_dijak_dogodki dijak.id %}" class="last {% block nav_dogodki %}{% endblock %}">Dogodki</a></li>
+    <li><a href="{% url stars_dijak_predmeti dijak.id %}" class="last {% block nav_predmeti %}{% endblock %}">Predmeti</a></li>
+    <li><a href="{% url stars_dijak_podatki dijak.id %}" class="last {% block nav_podatki %}{% endblock %}">Podatki</a></li>
+{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url stars_dijak dijak.id %}">Dijak</a></li>
+{% endblock %}

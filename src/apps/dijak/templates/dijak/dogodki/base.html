@@ -1,0 +1,11 @@
+{% extends 'dijak/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Dogodki{% endblock %}
+
+{% block nav_dogodki %}active{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url dijak_dogodki %}">Dogodki</a></li>
+{% endblock %}

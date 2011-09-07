@@ -1,0 +1,40 @@
+{% extends 'profesor/razredi/dijaki/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Uredi podatke{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_razredi_dijaki_mati_uredi razred.id dijak.id %}">Uredi podatke</a></li>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <div class="grid_12">        	<h1>Uredi podatke</h1>
+        </div>    	    	<div class="grid_6">
+    	    {% form_errors user_form %}
+            {% form_errors stars_form %}
+            {% form_errors p_form %}
+            
+            {% form_field user_form.first_name 'Ime' %}
+            {% form_field user_form.last_name 'Priimek' %}
+            {% form_field user_form.email 'E-pošta' %}
+            
+            {% form_field stars_form.domaci_telefon 'Domači telefon' %}
+            {% form_field stars_form.sluzbeni_telefon 'Službeni telefon' %}
+            {% form_field stars_form.mobitel 'Mobitel' %}
+    	</div>
+    	    
+        <div class="grid_6">
+            {% form_field p_form.ulica 'Ulica' %}
+            {% form_field p_form.hisna_stevilka 'Hišna številka' %}
+            {% form_field p_form.posta 'Pošta' %}
+            {% form_field p_form.kraj 'Kraj' %}
+        </div>
+        
+        <div class="grid_12">
+            <p><input type="submit" value="Shrani" /></p>
+        </div>	</form>
+{% endblock %}

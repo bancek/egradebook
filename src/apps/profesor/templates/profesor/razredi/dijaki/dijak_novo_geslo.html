@@ -1,0 +1,16 @@
+{% extends 'profesor/razredi/dijaki/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Novo geslo{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_razredi_dijaki_dijak_novo_geslo razred.id dijak.id %}">Novo geslo</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="grid_8">    	<h1>Novo geslo</h1>
+        
+        <p>Na dijakov e-naslov je bilo poslano novo geslo.</p>
+    </div>
+{% endblock %}

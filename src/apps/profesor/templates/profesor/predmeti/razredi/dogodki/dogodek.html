@@ -1,0 +1,48 @@
+{% extends 'profesor/predmeti/razredi/dogodki/base.html' %}
+
+{% load common %}
+
+{% block content %}
+    <div class="grid_8">
+        <h2>
+            {{ dogodek.ime }}
+            {% if dogodek.poucuje == poucuje %}
+                <a href="{% url profesor_predmeti_razredi_dogodki_uredi predmet.id razred.id dogodek.id %}" class="button edit right">Uredi</a>
+                <a href="{% url profesor_predmeti_razredi_dogodki_izbrisi predmet.id razred.id dogodek.id %}" class="button delete right">Izbriši</a>
+            {% endif %}
+        </h2>
+            	<table class="vcols full">    	    <col width="30%">    	    <col width="70%">    	        	    <tr>    	        <th>Datum:</th>    	        <td>{{ dogodek.datum }}</td>    	    </tr>    	    <tr>    	        <th>Predmet:</th>    	        <td>{{ dogodek.poucuje.predmet.ime }}</td>    	    </tr>        	<tr>    	        <th>Profesor:</th>    	        <td>{{ dogodek.poucuje.profesor|name }}</td>    	    </tr>    	    <tr>    	        <th>Ocenjevalno obdobje:</th>    	        <td>{{ dogodek.ocenjevalno_obdobje.ime }}</td>    	    </tr>    	</table>    </div>
+    
+    {% if dogodek.poucuje == poucuje %}
+        <div class="grid_8">
+            <h2>Ocene</h2>
+            
+            <table class="hcols full sortable">
+                <thead>
+                    <th style="width: 10%">#</th>
+                    <th>Ime</th>
+                    <th>Priimek</th>
+                    <th style="width: 25%">Ocena</th>
+                </thead>
+                <tbody>
+                {% for d in dijaki %}
+                    <tr>
+                        <td><a href="{% url profesor_predmeti_razredi_dijaki_dijak predmet.id razred.id d.id %}">{{ forloop.counter }}</a></td>
+                        <td>{{ d.ime }}</td>
+                        <td>{{ d.priimek }}</td>
+                        {% if d.ocena %}
+                            <td class="center">
+                                <a href="{% url profesor_predmeti_razredi_dijaki_ocene_ocena predmet.id razred.id d.id d.ocena.id %}" class="ocena-{{ d.ocena.ocena }}">{{ d.ocena.ocena }}</a>
+                            </td>
+                        {% else %}
+                            <td class="center">
+                                <a href="{% url profesor_predmeti_razredi_dijaki_ocene_dodaj_dogodek predmet.id razred.id d.id dogodek.id %}" class="button add">Dodaj</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load common %}
+
+{% block head_title %}Dijak{% endblock %}
+
+{% block user_info %}
+    <li><p><strong>{{ request.user|name }}</strong></p></li>
+    <li><a href="{% url dijak_nastavitve %}" class="first {% block nav_nastavitve %}{% endblock %}">Nastavitve</a></li>
+    <li><a href="{% url logout %}" class="last">Odjava</a></li>
+{% endblock %}
+
+{% block nav %}
+    <li><a href="{% url dijak %}" class="{% block nav_dijak %}{% endblock %}">Prva stran</a></li>
+    <li><a href="{% url dijak_ocene %}" class="{% block nav_ocene %}{% endblock %}">Ocene</a></li>
+    <li><a href="{% url dijak_dogodki %}" class="last {% block nav_dogodki %}{% endblock %}">Dogodki</a></li>
+    <li><a href="{% url dijak_predmeti %}" class="last {% block nav_predmeti %}{% endblock %}">Predmeti</a></li>
+    <li><a href="{% url dijak_sosolci %}" class="last {% block nav_sosolci %}{% endblock %}">Sošolci</a></li>
+    <li><a href="{% url dijak_podatki %}" class="last {% block nav_podatki %}{% endblock %}">Podatki</a></li>
+{% endblock %}

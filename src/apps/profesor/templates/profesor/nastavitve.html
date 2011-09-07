@@ -1,0 +1,42 @@
+{% extends 'profesor/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Nastavitve{% endblock %}
+
+{% block nav_nastavitve %}active{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_nastavitve %}">Nastavitve</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="grid_12">    	<h1>Nastavitve</h1>    	    	<form action="" method="post">
+    	    {% csrf_token %}
+            
+            {% include 'blocks/errors.html' %}
+            
+            <p>
+                <label for="id_email">E-naslov <span>*</span></label><br />
+                {{ form.email }}
+                {% if form.email.errors %}<span class="error">{{ form.email.errors|join:' ' }}</span>{% endif %}
+            </p>
+            
+            <p><strong>Gesla vpišite le, če želite trenutno geslo spremeniti.</strong></p>
+            
+            <p>
+                <label for="id_password">Staro geslo</label><br />
+                {{ form.password }}
+            </p>
+            
+            <p>
+                <label for="id_password1">Novo geslo</label><br />
+                {{ form.password1 }}
+            </p>
+            
+            <p>
+                <label for="id_password2">Ponovitev gesla</label><br />
+                {{ form.password2 }}
+            </p>
+                		<p><input type="submit" value="Shrani" /></p>    	</form>    </div>
+{% endblock %}

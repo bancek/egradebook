@@ -1,0 +1,34 @@
+{% extends 'profesor/predmeti/razredi/dijaki/ocene/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Uredi oceno{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_predmeti_razredi_dijaki_ocene_uredi predmet.id razred.id dijak.id ocena.id %}">Uredi oceno</a></li>
+{% endblock %}
+
+{% block js_ready %}
+    $('#id_datum_pridobitve').datepicker();
+    $('select').selectBox();
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <div class="grid_12">
+            <h1>Uredi oceno</h1>
+
+            {% form_errors form %}
+            
+            {% form_field form.dogodek 'Dogodek' %}
+            {% form_field form.ocenjevalno_obdobje 'Ocenjevalno obdobje' %}
+            {% form_field form.datum_pridobitve 'Datum pridobitve' %}
+            {% form_field form.ocena 'Ocena' %}
+            {% form_field form.opomba 'Opomba' %}
+            
+            <p><input type="submit" value="Shrani" /></p>
+        </div>
+    </form>
+{% endblock %}

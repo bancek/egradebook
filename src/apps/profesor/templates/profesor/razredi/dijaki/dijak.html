@@ -1,0 +1,25 @@
+{% extends 'profesor/razredi/dijaki/base.html' %}
+
+{% load common %}
+
+{% block nav_dijak %}active{% endblock %}
+
+{% block content %}
+    <div class="grid_8">
+        <h2>Zadnje ocene</h2>
+        
+        {% if zadnje_ocene %}
+            <ul class="info-list">
+                {% for ocena in zadnje_ocene %}
+                    <li>
+                        <a href="{% url profesor_razredi_dijaki_ocene_ocena razred.id dijak.id ocena.id %}">
+                            {{ ocena.datum_pridobitve }} - {{ ocena.poucuje.predmet.ime }}{% if ocena.dogodek %} ({{ ocena.dogodek.ime }}){% endif %}: <strong>{{ ocena.ocena }}</strong>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Ni ocen.</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'profesor/predmeti/razredi/dijaki/ocene/base.html' %}
+
+{% load common %}
+
+{% block content %}
+    <div class="grid_8">    	<h2>
+    	    Ocena
+            <a href="{% url profesor_predmeti_razredi_dijaki_ocene_uredi predmet.id razred.id dijak.id ocena.id %}" class="button edit right">Uredi</a>
+            <a href="{% url profesor_predmeti_razredi_dijaki_ocene_izbrisi predmet.id razred.id dijak.id ocena.id %}" class="button delete right">Izbriši</a>
+        </h2>    	    	<table class="vcols full">    	    <col width="20%">    	    <col width="30%">    	    <col width="50%">    	        	    <tr>    	        <td class="ocena" rowspan="6">{{ ocena.ocena }}</td>    	        <th>Dogodek:</th>    	        {% if ocena.dogodek %}    	            <td><a href="{% url profesor_predmeti_razredi_dogodki_dogodek predmet.id razred.id ocena.dogodek.id %}">{{ ocena.dogodek.ime|default:'/' }}</a></td>    	        {% else %}    	            <td>/</td>    	        {% endif %}    	    </tr>    	    <tr>    	        <th>Predmet:</th>    	        <td>{{ ocena.poucuje.predmet.ime }}</td>    	    </tr>        	<tr>    	        <th>Profesor:</th>    	        <td>{{ ocena.poucuje.profesor.uporabnik.get_full_name }}</td>    	    </tr>    	    <tr>    	        <th>Ocenjevalno obdobje:</th>    	        <td>{{ ocena.ocenjevalno_obdobje.ime }}</td>    	    </tr>    	    <tr>    	        <th>Datum:</th>    	        <td>{{ ocena.datum_pridobitve|default:'/' }}</td>    	    </tr>    	    <tr>    	        <th>Opomba:</th>    	        <td>{{ ocena.opomba|default:'/' }}</td>    	    </tr>        </table>    </div>
+{% endblock %}

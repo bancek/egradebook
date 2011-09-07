@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load common %}
+
+{% block head_title %}Starš{% endblock %}
+
+{% block user_info %}
+    <li><p><strong>{{ request.user|name }}</strong></p></li>
+    <li><a href="{% url stars_nastavitve %}" class="first {% block nav_nastavitve %}{% endblock %}">Nastavitve</a></li>
+    <li><a href="{% url logout %}" class="last">Odjava</a></li>
+{% endblock %}
+
+{% block nav %}
+    <li><a href="{% url stars %}" class="{% block nav_stars %}{% endblock %}">Prva stran</a></li>
+{% endblock %}

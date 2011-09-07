@@ -1,0 +1,38 @@
+{% load compress %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        
+        <!--[if IE]><style>
+        div {
+        zoom: 1; /* trigger hasLayout */
+        }
+        </style><![endif]-->
+
+        {% compress css %}
+            <link rel="stylesheet" href="{{ MEDIA_URL }}css/reset.css" type="text/css" />
+            <link rel="stylesheet" href="{{ MEDIA_URL }}css/960.css" type="text/css" />
+            
+            <link rel="stylesheet" href="{{ MEDIA_URL }}css/print.css" type="text/css" />
+            
+            {% block css_imports %}{% endblock %}
+        {% endcompress %}
+
+        <!--[if lt IE 9]>
+            <script src="{{ MEDIA_URL }}js/IE9.js"></script>
+        <![endif]-->
+        
+        {% block head_extra %}{% endblock %}
+    </head>
+    <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+    {% block body %}
+        {% block body_top %}{% endblock %}
+        
+        <div id="container">
+            {% block content %}{% endblock %}
+        </div>
+
+        {% block body_extra %}{% endblock %}
+    {% endblock %}
+    </body>
+</html>

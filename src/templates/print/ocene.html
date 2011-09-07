@@ -1,0 +1,44 @@
+{% extends 'base_print.html' %}
+
+{% load common %}
+
+{% block content %}
+    <h2>{{ dijak|name }}</h2>
+    
+    <h3>{{ dijak.razred.ime }}</h3>
+    
+    <br />
+    
+    <table class="hcols full">
+        <thead>
+            <th>&nbsp;</th>
+            {% for oo in ocene.ocenjevalna_obdobja %}
+                <th class="ocenjevalno-obdobje">
+                    {{ oo.ime }}
+                </th>
+            {% endfor %}
+            <th>&nbsp;</th>
+        </thead>
+        <tbody>
+        {% for d in ocene.predmeti %}
+            <tr>
+                <td class="predmet">
+                    {{ d.predmet.ime }}
+                </td>
+                {% for ox in d.ocene %}
+                    <td>
+                        {% for o in ox %}
+                            {{ o.ocena }}
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+                <td class="center">
+                    {% for o in d.zakljucena_ocena %}
+                        {{ o.ocena }}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

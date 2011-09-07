@@ -1,0 +1,21 @@
+{% extends 'stars/base.html' %}
+
+{% load common %}
+
+{% block nav_stars %}active{% endblock %}
+
+{% block content %}
+    <div class="grid_6">
+        <h2>Izberite dijaka</h2>
+        
+        <table class="hcols full">
+            {% for dijak in dijaki %}
+                <tr>
+                    <td>
+                        <a href="{% url stars_dijak dijak.id %}">{{ dijak|name }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

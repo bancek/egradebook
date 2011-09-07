@@ -1,0 +1,24 @@
+{% extends 'profesor/razredi/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Dodaj dijaka{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_razredi_dijaki_dijak_dodaj razred.id %}">Dodaj dijaka</a></li>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <div class="grid_12">        	<h1>Dodaj dijaka</h1>
+            
+    	    {% form_errors form %}
+            
+            {% form_field form.first_name 'Ime' %}
+            {% form_field form.last_name 'Priimek' %}
+            
+            <p><input type="submit" value="Dodaj" /></p>
+        </div>	</form>
+{% endblock %}

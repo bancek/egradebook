@@ -1,0 +1,48 @@
+{% extends 'dijak/base.html' %}
+
+{% load common %}
+
+{% block nav_dijak %}active{% endblock %}
+
+{% block content %}
+    <div class="grid_6">
+        <h2>Zadnje ocene</h2>
+        
+        {% if zadnje_ocene %}
+            <ul class="info-list">
+                {% for ocena in zadnje_ocene %}
+                    <li>
+                        <a href="{% url dijak_ocene_ocena ocena.id %}">
+                            {{ ocena.datum_pridobitve }} - {{ ocena.poucuje.predmet.ime }}{% if ocena.dogodek %} ({{ ocena.dogodek.ime }}){% endif %}: <strong>{{ ocena.ocena }}</strong>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Ni ocen.</p>
+        {% endif %}
+    </div>
+    
+    <div class="grid_6">
+        <h2>Prijahajoči dogodki</h2>
+        
+        <table class="hcols full sortable">
+            <thead>
+                <th>Dogodek</th>
+                <th>Datum</th>
+                <th>Predmet</th>
+            </thead>
+            <tbody>
+            {% for d in prihajajoci_dogodki %}
+                <tr>
+                    <td>
+                        <a href="{% url dijak_dogodki_dogodek d.id %}">{{ d.ime }}</a>
+                    </td>
+                    <td data-source="{{ d.datum|date:'U' }}">{{ d.datum }}</td>
+                    <td>{{ d.poucuje.predmet.ime }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

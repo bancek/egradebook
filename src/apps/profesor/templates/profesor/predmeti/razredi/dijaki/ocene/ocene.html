@@ -1,0 +1,12 @@
+{% extends 'profesor/predmeti/razredi/dijaki/ocene/base.html' %}
+
+{% load common %}
+
+{% block content %}
+    <div class="grid_8">    	<h2>
+    	    Ocene
+            <a href="{% url profesor_predmeti_razredi_dijaki_ocene_dodaj predmet.id razred.id dijak.id %}" class="button add right">Dodaj oceno</a>
+            <a href="{% url profesor_predmeti_razredi_dijaki_ocene_zakljuci predmet.id razred.id dijak.id %}" class="button add right">Zaključi predmet</a>
+            <a href="{% url profesor_predmeti_razredi_dijaki_ocene_natisni predmet.id razred.id dijak.id %}" class="button right print">Natisni</a>
+        </h2>    	    	{% include 'profesor/predmeti/razredi/dijaki/ocene/blocks/ocene.html' %}    </div>
+{% endblock %}

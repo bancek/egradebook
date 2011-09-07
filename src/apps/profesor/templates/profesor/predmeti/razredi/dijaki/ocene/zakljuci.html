@@ -1,0 +1,41 @@
+{% extends 'profesor/predmeti/razredi/dijaki/ocene/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Zaključi predmet{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_predmeti_razredi_dijaki_ocene_zakljuci predmet.id razred.id dijak.id %}">Zaključi predmet</a></li>
+{% endblock %}
+
+{% block js_ready %}
+    $('#id_datum_pridobitve').datepicker();
+    $('select').selectBox();
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <div class="grid_6">
+            <h1>Zaključi predmet</h1>
+
+            {% form_errors form %}
+            
+            {% form_field form.datum_pridobitve 'Datum pridobitve' %}
+            {% form_field form.ocena 'Ocena' %}
+            
+            <p><input type="submit" value="Zaključi" /></p>
+        </div>
+        
+        <div class="grid_6">
+            <h1>Ocene</h1>
+            
+            {% include 'profesor/predmeti/razredi/dijaki/ocene/blocks/ocene.html' %}
+            <br />
+            <h3>Povprečje: <strong>{{ povprecje|default:'/' }}</strong></h3>
+            <br />
+            <p><a href="{% url profesor_predmeti_razredi_dijaki_ocene_zakljuci_izbrisi predmet.id razred.id dijak.id %}" class="button delete">Izbriši zaključeno oceno</a></p>
+        </div>
+    </form>
+{% endblock %}

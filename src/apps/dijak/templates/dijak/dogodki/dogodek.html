@@ -1,0 +1,9 @@
+{% extends 'dijak/dogodki/base.html' %}
+
+{% load common %}
+
+{% block content %}
+    <div class="grid_8">
+        <h2>{{ dogodek.ime }}</h2>
+            	<table class="vcols full">    	    <col width="30%">    	    <col width="70%">    	        	    <tr>    	        <th>Datum:</th>    	        <td>{{ dogodek.datum }}</td>    	    </tr>    	    <tr>    	        <th>Predmet:</th>    	        <td>{{ dogodek.poucuje.predmet.ime }}</td>    	    </tr>        	<tr>    	        <th>Profesor:</th>    	        <td>{{ dogodek.poucuje.profesor|name }}</td>    	    </tr>    	    <tr>    	        <th>Ocenjevalno obdobje:</th>    	        <td>{{ dogodek.ocenjevalno_obdobje.ime }}</td>    	    </tr>    	</table>    </div>
+{% endblock %}

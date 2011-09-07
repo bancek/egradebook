@@ -1,0 +1,32 @@
+{% extends 'profesor/razredi/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Predmeti{% endblock %}
+
+{% block nav_predmeti %}active{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_razredi_predmeti razred.id %}">Predmeti</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="grid_8">
+        <h2>Predmeti</h2>
+        
+        <table class="hcols full sortable">
+            <thead>
+                <th>Predmet</th>
+                <th>Profesor</th>
+            </thead>
+            <tbody>
+            {% for p in poucuje %}
+                <tr>
+                    <td>{{ p.predmet.ime }}</td>
+                    <td>{{ p.profesor|name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

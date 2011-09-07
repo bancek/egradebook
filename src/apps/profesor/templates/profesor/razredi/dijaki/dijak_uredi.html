@@ -1,0 +1,54 @@
+{% extends 'profesor/razredi/dijaki/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Uredi podatke{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_razredi_dijaki_dijak_uredi razred.id dijak.id %}">Uredi podatke</a></li>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <div class="grid_12">        	<h1>Uredi podatke</h1>
+        </div>    	    	<div class="grid_6">
+    	    {% form_errors user_form %}
+            {% form_errors dijak_form %}
+            {% form_errors sp_form %}
+            {% form_errors zp_form %}
+            
+            {% form_field user_form.first_name 'Ime' %}
+            {% form_field user_form.last_name 'Priimek' %}
+            {% form_field user_form.email 'E-pošta' %}
+            
+            {% form_field dijak_form.emso 'EMŠO' %}
+            {% form_field dijak_form.datum_rojstva 'Datum rojstva' %}
+            {% form_field dijak_form.v_dijaskem_domu 'Je v dijaškem domu' %}
+            {% form_field dijak_form.mobitel 'Mobitel' %}
+    	</div>
+    	    
+        <div class="grid_6">
+            <h3>Stalno prebivališče</h3>
+            <br />
+            
+            {% form_field sp_form.ulica 'Ulica' %}
+            {% form_field sp_form.hisna_stevilka 'Hišna številka' %}
+            {% form_field sp_form.posta 'Pošta' %}
+            {% form_field sp_form.kraj 'Kraj' %}
+            
+            <br />
+            <h3>Začasno prebivališče:</h3>
+            <br />
+            
+            {% form_field zp_form.ulica 'Ulica' %}
+            {% form_field zp_form.hisna_stevilka 'Hišna številka' %}
+            {% form_field zp_form.posta 'Pošta' %}
+            {% form_field zp_form.kraj 'Kraj' %}
+        </div>
+        
+        <div class="grid_12">
+            <p><input type="submit" value="Shrani" /></p>
+        </div>	</form>
+{% endblock %}

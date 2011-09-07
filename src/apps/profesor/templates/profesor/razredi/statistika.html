@@ -1,0 +1,82 @@
+{% extends 'profesor/razredi/base.html' %}
+
+{% load common humanize %}
+
+{% block head_title %}Statistika{% endblock %}
+
+{% block nav_statistika %}active{% endblock %}
+
+{% block js_ready %}
+    var ocene = jQuery.parseJSON('{{ ocene|jsonify }}');
+    
+    $.plot($('#ocene'), ocene, {
+        series: {
+            pie: { 
+                show: true,
+                radius: 1,
+                label: {
+                    show: true,
+                    radius: 0.6,
+                    formatter: function(label, series){
+                        return '<div style="font-size:12pt;text-align:center;padding:2px;color:white;font-weight:bold">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
+                    }
+                }
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+    
+    var po_mesecih = jQuery.parseJSON('{{ po_mesecih|jsonify }}');
+    
+    $.plot($('#po-mesecih'), [po_mesecih], {
+        series: {
+            lines: {
+                show: true
+            }
+        },
+        legend: {
+            show: false
+        },
+        xaxis: {
+            mode: 'time',
+            minTickSize: [1, 'month'],
+        }
+    });
+{% endblock %}
+
+{% block content %}
+    <div class="grid_6">
+        <h2>Dijaki</h2>
+        
+        <table class="hcols full sortable">
+            <thead>
+                <th style="width: 15%">#</th>
+                <th>Ime</th>
+                <th>Priimek</th>
+                <th>Povprečje ocen</th>
+            </thead>
+            <tbody>
+            {% for d in dijaki %}
+                <tr>
+                    <td><a href="{% url profesor_razredi_dijaki_dijak razred.id d.id %}">{{ forloop.counter }}</a></td>
+                    <td>{{ d.ime }}</td>
+                    <td>{{ d.priimek }}</td>
+                    <td>{{ d.povprecje|format:'%.2f'|default:0 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="grid_6">
+        <h2>Ocene</h2>
+        
+        <div id="ocene" style="width: 300px; height: 300px; margin: 0 auto;"></div>
+        
+        <h2>Povprečje po mesecih</h2>
+        
+        <div id="po-mesecih" style="width: 460px; height: 300px; margin: 0 auto;"></div>
+    </div>
+{% endblock %}

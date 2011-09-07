@@ -1,0 +1,36 @@
+<table class="hcols full">
+    <thead>
+        <th>&nbsp;</th>
+        {% for oo in ocene.ocenjevalna_obdobja %}
+            <th class="ocenjevalno-obdobje">
+                <a href="?oo={{ oo.id }}">{{ oo.ime }}</a>
+            </th>
+        {% endfor %}
+        <th>&nbsp;</th>
+    </thead>
+    <tbody>
+    {% for d in ocene.predmeti %}
+        <tr>
+            <td class="predmet">
+                <a href="?p={{ d.predmet.id }}" class="{% if d.predmet == predmet %}strong{% endif %}">{{ d.predmet.ime }}</a>
+            </td>
+            {% for ox in d.ocene %}
+                <td>
+                    {% for o in ox %}
+                        <a href="{% url profesor_predmeti_razredi_dijaki_ocene_ocena predmet.id razred.id dijak.id o.id %}" class="ocena-{{ o.ocena }}">{{ o.ocena }}</a>
+                    {% endfor %}
+                </td>
+            {% endfor %}
+            <td class="center">
+                {% for o in d.zakljucena_ocena %}
+                    {% if d.predmet == predmet %}
+                        <a href="{% url profesor_predmeti_razredi_dijaki_ocene_zakljuci predmet.id razred.id dijak.id %}" class="ocena-{{ o.ocena }}">{{ o.ocena }}</a>
+                    {% else %}
+                        <span class="ocena-{{ o.ocena }}">{{ o.ocena }}</span>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

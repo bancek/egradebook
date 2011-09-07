@@ -1,0 +1,13 @@
+{% extends 'profesor/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Predmeti{% endblock %}
+
+{% block nav %}
+    <li><a href="{% url profesor_predmeti_predmet predmet.id %}" class="{% block nav_predmet %}{% endblock %}">Predmet</a></li>
+{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_predmeti_predmet predmet.id %}">{{ predmet.ime }}</a></li>
+{% endblock %}

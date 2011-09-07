@@ -1,0 +1,35 @@
+{% extends 'profesor/base.html' %}
+
+{% load common %}
+
+{% block nav_profesor %}active{% endblock %}
+
+{% block content %}
+    <div class="grid_6">
+        <h2>Predmeti</h2>
+        
+        <table class="hcols full">
+            {% for p in predmeti %}
+                <tr>
+                    <td>
+                        <a href="{% url profesor_predmeti_predmet p.id %}">{{ p.ime }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <div class="grid_6">
+        <h2>Razredi</h2>
+        
+        <table class="hcols full">
+            {% for r in razredi %}
+                <tr>
+                    <td>
+                        <a href="{% url profesor_razredi_razred r.id %}">{{ r.ime }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

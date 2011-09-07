@@ -1,0 +1,20 @@
+{% extends 'dijak/dogodki/base.html' %}
+
+{% load common %}
+
+{% block content %}
+    <div class="grid_12">
+        <h2>Prijahajoči dogodki</h2>
+        
+        <div class="table-pager">        	<table class="hcols full sortable">        	    <thead>        	        <th>Dogodek</th>        	        <th>Datum</th>        	        <th>Predmet</th>        	    </thead>        	    <tbody>        	    {% for d in prihajajoci_dogodki %}        	        <tr>        	            <td>        	                <a href="{% url dijak_dogodki_dogodek d.id %}">{{ d.ime }}</a>        	            </td>        	            <td data-source="{{ d.datum|date:'U' }}">{{ d.datum }}</td>        	            <td>{{ d.poucuje.predmet.ime }}</td>        	        </tr>        	    {% endfor %}        	    </tbody>        	</table>
+            
+            {% include 'blocks/pager.html' %}        </div>
+    </div>
+    <div class="grid_12">
+        <h2>Pretekli dogodki</h2>
+        
+        <div class="table-pager">        	<table class="hcols full sortable">        	    <thead>        	        <th>Dogodek</th>        	        <th>Datum</th>        	        <th>Predmet</th>        	    </thead>        	    <tbody>        	    {% for d in pretekli_dogodki %}        	        <tr>        	            <td>        	                <a href="{% url dijak_dogodki_dogodek d.id %}">{{ d.ime }}</a>        	            </td>        	            <td data-source="{{ d.datum|date:'U' }}">{{ d.datum }}</td>        	            <td>{{ d.poucuje.predmet.ime }}</td>        	        </tr>        	    {% endfor %}        	    </tbody>        	</table>
+            
+            {% include 'blocks/pager.html' %}        </div>
+    </div>
+{% endblock %}

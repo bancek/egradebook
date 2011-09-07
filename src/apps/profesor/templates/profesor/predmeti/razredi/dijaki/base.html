@@ -1,0 +1,14 @@
+{% extends 'profesor/predmeti/razredi/base.html' %}
+
+{% load common %}
+
+{% block head_title %}{{ dijak|name }}{% endblock %}
+
+{% block nav %}
+    <li><a href="{% url profesor_predmeti_razredi_dijaki_ocene predmet.id razred.id dijak.id %}" class="{% block nav_ocene %}{% endblock %}">Ocene</a></li>
+    <li><a href="{% url profesor_predmeti_razredi_dijaki_podatki predmet.id razred.id dijak.id %}" class="{% block nav_podatki %}{% endblock %}">Podatki</a></li>
+{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_predmeti_razredi_dijaki_dijak predmet.id razred.id dijak.id %}">{{ dijak|name }}</a></li>
+{% endblock %}

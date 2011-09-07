@@ -1,0 +1,24 @@
+{% extends 'profesor/predmeti/razredi/dogodki/base.html' %}
+
+{% load common %}
+
+{% block content %}
+    <div class="grid_12">
+        <a href="{% url profesor_predmeti_razredi_dogodki_dodaj predmet.id razred.id %}" class="button add">Dodaj dogodek</a>
+    </div>
+    <br /><br />
+    <div class="grid_12">
+        <h2>Prijahajoči dogodki</h2>
+        
+        <div class="table-pager">        	<table class="hcols full sortable">        	    <thead>        	        <th>Dogodek</th>        	        <th>Datum</th>        	        <th>Predmet</th>        	    </thead>        	    <tbody>        	    {% for d in prihajajoci_dogodki %}        	        <tr class="{% if d.poucuje == poucuje %}strong{% endif %}">        	            <td>        	                <a href="{% url profesor_predmeti_razredi_dogodki_dogodek predmet.id razred.id d.id %}">{{ d.ime }}</a>        	            </td>        	            <td data-source="{{ d.datum|date:'U' }}">{{ d.datum }}</td>        	            <td>{{ d.poucuje.predmet.ime }}</td>        	        </tr>        	    {% endfor %}        	    </tbody>        	</table>
+            
+            {% include 'blocks/pager.html' %}        </div>
+    </div>
+    <div class="grid_12">
+        <h2>Pretekli dogodki</h2>
+        
+        <div class="table-pager">        	<table class="hcols full sortable">        	    <thead>        	        <th>Dogodek</th>        	        <th>Datum</th>        	        <th>Predmet</th>        	    </thead>        	    <tbody>        	    {% for d in pretekli_dogodki %}        	        <tr class="{% if d.poucuje == poucuje %}strong{% endif %}">        	            <td>        	                <a href="{% url profesor_predmeti_razredi_dogodki_dogodek predmet.id razred.id d.id %}">{{ d.ime }}</a>        	            </td>        	            <td data-source="{{ d.datum|date:'U' }}">{{ d.datum }}</td>        	            <td>{{ d.poucuje.predmet.ime }}</td>        	        </tr>        	    {% endfor %}        	    </tbody>        	</table>
+            
+            {% include 'blocks/pager.html' %}        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends 'dijak/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Podatki{% endblock %}
+
+{% block nav_podatki %}active{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url dijak_podatki %}">Podatki</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="grid_12">
+        <h2>Moji podatki</h2>
+        
+        <table class="vcols full">
+            <col width="20%">
+            <col width="80%">
+            
+            <tr>
+                <th>Ime:</th>
+                <td>{{ dijak.uporabnik.first_name|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Priimek:</th>
+                <td>{{ dijak.uporabnik.last_name|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>E-naslov:</th>
+                <td>{{ dijak.uporabnik.email|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>EMŠO:</th>
+                <td>{{ dijak.emso|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Datum rojstva:</th>
+                <td>{{ dijak.datum_rojstva|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Stalno prebivališče:</th>
+                <td>{{ dijak.stalno_prebivalisce|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Začasno prebivališče:</th>
+                <td>{{ dijak.zacasno_prebivalisce|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Je v dijaškem domu?</th>
+                <td>{{ dijak.v_dijaskem_domu|yesno:'Da,Ne' }}</td>
+            </tr>
+            <tr>
+                <th>Mobitel:</th>
+                <td>{{ dijak.mobitel|default:'/' }}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="grid_6">
+        <h2>Podatki o očetu</h2>
+        
+        {% if dijak.oce %}
+            <table class="vcols full">
+                <col width="30%">
+                <col width="70%">
+                
+                <tr>
+                    <th>Ime:</th>
+                    <td>{{ dijak.oce.uporabnik.first_name|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Priimek:</th>
+                    <td>{{ dijak.oce.uporabnik.last_name|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>E-mail:</th>
+                    <td>{{ dijak.oce.uporabnik.email|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Prebivališče:</th>
+                    <td>{{ dijak.oce.prebivalisce|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Domači telefon:</th>
+                    <td>{{ dijak.oce.domaci_telefon|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Službeni telefon:</th>
+                    <td>{{ dijak.oce.sluzbeni_telefon|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Mobitel:</th>
+                    <td>{{ dijak.oce.mobitel|default:'/' }}</td>
+                </tr>
+            </table>
+        {% else %}
+            <p>Ni podatkov.</p>
+        {% endif %}
+    </div>
+    
+    <div class="grid_6">
+        <h2>Podatki o materi</h2>
+        
+        {% if dijak.mati %}
+            <table class="vcols full">
+                <col width="30%">
+                <col width="70%">
+                
+                <tr>
+                    <th>Ime:</th>
+                    <td>{{ dijak.mati.uporabnik.first_name|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Priimek:</th>
+                    <td>{{ dijak.mati.uporabnik.last_name|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>E-mail:</th>
+                    <td>{{ dijak.mati.uporabnik.email|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Prebivališče:</th>
+                    <td>{{ dijak.mati.prebivalisce|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Domači telefon:</th>
+                    <td>{{ dijak.mati.domaci_telefon|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Službeni telefon:</th>
+                    <td>{{ dijak.mati.sluzbeni_telefon|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Mobitel:</th>
+                    <td>{{ dijak.mati.mobitel|default:'/' }}</td>
+                </tr>
+            </table>
+        {% else %}
+            <p>Ni podatkov.</p>
+        {% endif %}
+    </div>
+{% endblock %}

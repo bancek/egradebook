@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load common %}
+
+{% block head_title %}Prijava{% endblock %}
+
+{% block body %}
+    <div id="login-wrapper">
+        <div id="logo">
+            <h1>e<span>Redovalnica</span></h1>
+        </div>
+        
+        <form action="" id="loginform" class="validate" method="post">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                {% for error in form.non_field_errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+            
+            <p>
+                <label>Uporabniško ime:</label><br />
+                {{ form.username }}{% for error in form.username.errors %}
+                <div class="error">{{ error }}</div>{% endfor %}
+            </p>
+
+            <p>            	<label>Geslo:</label><br />
+                {{ form.password }}
+                {% for error in form.password.errors %}<div class="error">{{ error }}</div>{% endfor %}            </p>
+
+            <p>            	<input type="submit" class="submit" value="Prijava" />            </p>
+        </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base_print.html' %}
+
+{% load common %}
+
+{% block content %}
+        <h1>{{ razred.ime }}</h1>
+        
+<pre>Razrednik: {{ razred.razrednik|name }}
+
+{% for d in dijaki %}{{ forloop.counter|lpad:2 }}. {{ d.ime }} {{ d.priimek }}
+{% endfor %}</pre>
+{% endblock %}

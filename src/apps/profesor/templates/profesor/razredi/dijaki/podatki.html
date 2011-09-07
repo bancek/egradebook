@@ -1,0 +1,173 @@
+{% extends 'profesor/razredi/dijaki/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Podatki{% endblock %}
+
+{% block nav_podatki %}active{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_razredi_dijaki_podatki razred.id dijak.id %}">Podatki</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="grid_12">
+        <h2>
+            Podatki o dijaku
+            <a href="{% url profesor_razredi_dijaki_dijak_uredi razred.id dijak.id %}" class="button edit right">Uredi</a>
+            <a href="{% url profesor_razredi_dijaki_dijak_izbrisi razred.id dijak.id %}" class="button delete right">Izbriši</a>
+        </h2>
+        
+        <table class="vcols full">
+            <col width="20%">
+            <col width="80%">
+            
+            <tr>
+                <th>Ime:</th>
+                <td>{{ dijak.uporabnik.first_name|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Priimek:</th>
+                <td>{{ dijak.uporabnik.last_name|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>E-naslov:</th>
+                <td>{{ dijak.uporabnik.email|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>EMŠO:</th>
+                <td>{{ dijak.emso|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Datum rojstva:</th>
+                <td>{{ dijak.datum_rojstva|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Stalno prebivališče:</th>
+                <td>{{ dijak.stalno_prebivalisce|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Začasno prebivališče:</th>
+                <td>{{ dijak.zacasno_prebivalisce|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Je v dijaškem domu?</th>
+                <td>{{ dijak.v_dijaskem_domu|yesno:'Da,Ne' }}</td>
+            </tr>
+            <tr>
+                <th>Mobitel:</th>
+                <td>{{ dijak.mobitel|default:'/' }}</td>
+            </tr>
+            <tr>
+                <th>Uporabniško ime:</th>
+                <td>{{ dijak.uporabnik.username }}</td>
+            </tr>
+            <tr>            	<th>Geslo:</th>            	<td><a href="{% url profesor_razredi_dijaki_dijak_novo_geslo razred.id dijak.id %}" class="strong">Novo geslo</a></td>            </tr>
+        </table>
+    </div>
+    
+    <div class="grid_12">
+        <h2>
+            Podatki o očetu
+            <a href="{% url profesor_razredi_dijaki_oce_uredi razred.id dijak.id %}" class="button edit right">Uredi</a>
+            <a href="{% url profesor_razredi_dijaki_oce_izbrisi razred.id dijak.id %}" class="button delete right">Izbriši</a>
+        </h2>
+        
+        {% if dijak.oce %}
+            <table class="vcols full">
+                <col width="20%">
+                <col width="80%">
+                
+                <tr>
+                    <th>Ime:</th>
+                    <td>{{ dijak.oce.uporabnik.first_name|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Priimek:</th>
+                    <td>{{ dijak.oce.uporabnik.last_name|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>E-mail:</th>
+                    <td>{{ dijak.oce.uporabnik.email|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Prebivališče:</th>
+                    <td>{{ dijak.oce.prebivalisce|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Domači telefon:</th>
+                    <td>{{ dijak.oce.domaci_telefon|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Službeni telefon:</th>
+                    <td>{{ dijak.oce.sluzbeni_telefon|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Mobitel:</th>
+                    <td>{{ dijak.oce.mobitel|default:'/' }}</td>
+                </tr>
+                <tr>                	<th>Uporabniško ime:</th>                	<td>{{ dijak.oce.uporabnik.username }}</td>                </tr>
+                <tr>
+                    <th>Geslo:</th>
+                    <td><a href="{% url profesor_razredi_dijaki_oce_novo_geslo razred.id dijak.id %}">Novo geslo</a></td>
+                </tr>
+            </table>
+        {% else %}
+            <p>Ni podatkov.</p>
+        {% endif %}
+    </div>
+    
+    <div class="grid_12">
+        <h2>
+            Podatki o materi
+            <a href="{% url profesor_razredi_dijaki_mati_uredi razred.id dijak.id %}" class="button edit right">Uredi</a>
+            <a href="{% url profesor_razredi_dijaki_mati_izbrisi razred.id dijak.id %}" class="button delete right">Izbriši</a>
+        </h2>
+        
+        {% if dijak.mati %}
+            <table class="vcols full">
+                <col width="20%">
+                <col width="80%">
+                
+                <tr>
+                    <th>Ime:</th>
+                    <td>{{ dijak.mati.uporabnik.first_name|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Priimek:</th>
+                    <td>{{ dijak.mati.uporabnik.last_name|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>E-mail:</th>
+                    <td>{{ dijak.mati.uporabnik.email|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Prebivališče:</th>
+                    <td>{{ dijak.mati.prebivalisce|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Domači telefon:</th>
+                    <td>{{ dijak.mati.domaci_telefon|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Službeni telefon:</th>
+                    <td>{{ dijak.mati.sluzbeni_telefon|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Mobitel:</th>
+                    <td>{{ dijak.mati.mobitel|default:'/' }}</td>
+                </tr>
+                <tr>
+                    <th>Uporabniško ime:</th>
+                    <td>{{ dijak.mati.uporabnik.username }}</td>
+                </tr>
+                <tr>
+                    <th>Geslo:</th>
+                    <td><a href="{% url profesor_razredi_dijaki_mati_novo_geslo razred.id dijak.id %}">Novo geslo</a></td>
+                </tr>
+            </table>
+        {% else %}
+            <p>Ni podatkov.</p>
+        {% endif %}
+    </div>
+{% endblock %}

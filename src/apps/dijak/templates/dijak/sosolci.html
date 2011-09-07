@@ -1,0 +1,37 @@
+{% extends 'dijak/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Sošolci{% endblock %}
+
+{% block nav_sosolci %}active{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url dijak_sosolci %}">Sošolci</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="grid_8">
+        <h2>
+            Sošolci
+            <a href="{% url dijak_sosolci_natisni %}" class="button right print">Natisni seznam</a>
+        </h2>
+        
+        <table class="hcols full sortable">
+            <thead>
+                <th style="width: 15%">#</th>
+                <th>Ime</th>
+                <th>Priimek</th>
+            </thead>
+            <tbody>
+            {% for d in sosolci %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ d.ime }}</td>
+                    <td>{{ d.priimek }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

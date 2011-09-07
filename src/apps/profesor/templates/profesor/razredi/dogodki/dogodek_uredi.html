@@ -1,0 +1,33 @@
+{% extends 'profesor/razredi/dogodki/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Uredi dogodek{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_razredi_dogodki_uredi razred.id dogodek.id %}">Uredi dogodek</a></li>
+{% endblock %}
+
+{% block js_ready %}
+    $('#id_datum').datepicker();
+    $('select').selectBox();
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <div class="grid_12">
+            <h1>Uredi dogodek</h1>
+
+            {% form_errors form %}
+            
+            {% form_field form.ime 'Ime' %}
+            {% form_field form.datum 'Datum' %}
+            {% form_field form.poucuje 'Predmet' %}
+            {% form_field form.ocenjevalno_obdobje 'Ocenjevalno obdobje' %}
+            
+            <p><input type="submit" value="Shrani" /></p>
+        </div>
+    </form>
+{% endblock %}

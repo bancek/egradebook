@@ -1,0 +1,11 @@
+{% extends 'profesor/razredi/dijaki/base.html' %}
+
+{% load common %}
+
+{% block head_title %}Ocene{% endblock %}
+
+{% block nav_ocene %}active{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}
+    <li><a href="{% url profesor_razredi_dijaki_ocene razred.id dijak.id %}">Ocene</a></li>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'profesor/razredi/dijaki/ocene/base.html' %}
+
+{% load common %}
+
+{% block content %}
+    <div class="grid_8">    	<h2>
+    	    Ocene
+            <a href="{% url profesor_razredi_dijaki_ocene_natisni razred.id dijak.id %}" class="button right print">Natisni</a>
+        </h2>    	
+        <table class="hcols full">
+            <thead>
+                <th>&nbsp;</th>
+                {% for oo in ocene.ocenjevalna_obdobja %}
+                    <th class="ocenjevalno-obdobje">
+                        <a href="?oo={{ oo.id }}">{{ oo.ime }}</a>
+                    </th>
+                {% endfor %}
+                <th>&nbsp;</th>
+            </thead>
+            <tbody>
+            {% for d in ocene.predmeti %}
+                <tr>
+                    <td class="predmet">
+                        <a href="?p={{ d.predmet.id }}">{{ d.predmet.ime }}</a>
+                    </td>
+                    {% for ox in d.ocene %}
+                        <td>
+                            {% for o in ox %}
+                                <a href="{% url profesor_razredi_dijaki_ocene_ocena razred.id dijak.id o.id %}" class="ocena-{{ o.ocena }}">{{ o.ocena }}</a>
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                    <td class="center">
+                        {% for o in d.zakljucena_ocena %}
+                            <span class="ocena-{{ o.ocena }}">{{ o.ocena }}</span>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>    </div>
+{% endblock %}

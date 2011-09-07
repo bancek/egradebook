@@ -1,0 +1,57 @@
+{% extends 'profesor/razredi/base.html' %}
+
+{% load common %}
+
+{% block head_title %}{{ razred.ime }}{% endblock %}
+
+{% block nav_razred %}active{% endblock %}
+
+{% block content %}
+    <div class="grid_6">
+        <h2>
+            Dijaki
+            <a href="{% url profesor_razredi_dijaki_dijak_dodaj razred.id %}" class="button right add">Dodaj dijaka</a>
+            <a href="{% url profesor_razredi_razred_natisni razred.id %}" class="button right print">Natisni seznam</a>
+        </h2>
+        
+        <table class="hcols full sortable">
+            <thead>
+                <th style="width: 15%">#</th>
+                <th>Ime</th>
+                <th>Priimek</th>
+            </thead>
+            <tbody>
+            {% for d in dijaki %}
+                <tr>
+                    <td><a href="{% url profesor_razredi_dijaki_dijak razred.id d.id %}">{{ forloop.counter }}</a></td>
+                    <td>{{ d.ime }}</td>
+                    <td>{{ d.priimek }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="grid_6">
+        <h2>Prihajajoči dogodki</h2>
+        
+        <table class="hcols full sortable">
+            <thead>
+                <th>Dogodek</th>
+                <th>Datum</th>
+                <th>Predmet</th>
+            </thead>
+            <tbody>
+            {% for d in prihajajoci_dogodki %}
+                <tr>
+                    <td>
+                        <a href="{% url profesor_razredi_dogodki_dogodek razred.id d.id %}">{{ d.ime }}</a>
+                    </td>
+                    <td data-source="{{ d.datum|date:'U' }}">{{ d.datum }}</td>
+                    <td>{{ d.poucuje.predmet.ime }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
